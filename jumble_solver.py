@@ -1,10 +1,36 @@
 import sys
 from collections import Counter
+import urllib.request
+import os
+
+
+def get_dict():
+    p = 'words.txt'
+    if not os.path.exists(p):
+        print("Dictionary not found, downloading...")
+        url = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt'
+        try:
+            resp = urllib.request.urlopen(url)
+            data = resp.read()
+            f = open(p, 'wb')
+            f.write(data)
+            f.close()
+            print("Downloaded!")
+        except:
+            print("Download failed, trying backup...")
+            url2 = 'https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-usa.txt'
+            resp = urllib.request.urlopen(url2)
+            data = resp.read()
+            f = open(p, 'wb')
+            f.write(data)
+            f.close()
+    return p
 
 
 def solve(w):
     words = []
-    f = open('/usr/share/dict/words', 'r')
+    dict_path = get_dict()
+    f = open(dict_path, 'r')
     lines = f.readlines()
     f.close()
     
