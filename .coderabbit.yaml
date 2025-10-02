@@ -1,0 +1,76 @@
+# CodeRabbit Configuration for Python Project
+# Enforces Google Python Style Guide, strong typing, and modern syntax
+
+language: "en-US"
+
+early_access: false
+
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - main
+      - master
+      - develop
+
+  # Path-based review settings
+  path_instructions:
+    - path: "**/*.py"
+      instructions: |
+        - Enforce Google Python Style Guide strictly
+        - All functions and methods must have type hints for parameters and return values
+        - Use modern Python syntax (3.10+): use | for Union types, use match/case when appropriate
+        - Docstrings should be concise but informative - focus on what/why, not how
+        - Use Google-style docstrings with Args, Returns, Raises sections only when needed
+        - Flag any use of `typing.Union` or `typing.Optional` - prefer | and | None
+        - Ensure all imports are properly typed (no untyped imports from third-party libraries)
+        - Check for consistent naming: snake_case for functions/variables, PascalCase for classes
+        - Flag overly verbose docstrings - prefer clarity over exhaustive documentation
+        - Verify proper use of type annotations including generics (list[str], dict[str, int], etc.)
+        - Check for proper exception handling with specific exception types
+        - Encourage use of dataclasses or Pydantic models for structured data
+        - Flag any usage of `type: ignore` comments without justification
+
+    - path: "**/*_test.py"
+      instructions: |
+        - ENFORCE functional style tests - all tests must be pure functions
+        - NO test classes - flag any use of unittest.TestCase or pytest classes
+        - Test functions should have descriptive names that explain what is being tested (test_should_*)
+        - Type hints required but docstrings can be minimal or omitted if the test name is clear
+        - Heavy use of pytest fixtures and parametrize for DRY tests - this is the functional way
+        - Use fixtures for setup/teardown instead of class-based setup methods
+        - Verify proper use of assertions with descriptive messages
+        - Encourage composition of fixtures over inheritance
+        - Flag any stateful patterns or side effects not managed by fixtures
+        - Tests should be independent and able to run in any order
+        - CRITICAL: Tests must be placed next to the module they test (module.py → module_test.py)
+        - ONLY test public API - flag any tests that import or test private functions/methods (prefixed with _)
+        - Tests should treat the module as a black box - no testing of internal implementation details
+        - Flag any tests that reach into private attributes or mock internal functions
+        - Tests should verify behavior through public interfaces only
+        - If a test needs to access internals, that's a code smell - the public API may be insufficient
+
+    - path: "**/__init__.py"
+      instructions: |
+        - Keep minimal - only necessary imports and __all__ definitions
+        - Type hints for any functions defined here
+        - Brief module-level docstring if the package needs explanation
+
+chat:
+  auto_reply: true
+
+# Tone and style preferences
+tone_instructions: |
+  - Be direct and concise in feedback
+  - Focus on actionable improvements
+  - Prioritize type safety and code clarity
+  - Avoid being pedantic about minor style issues if code is otherwise clean
+  - Highlight modern Python idioms when legacy patterns are used
+  - Encourage brevity in documentation while maintaining clarity
