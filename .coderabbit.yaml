@@ -6,7 +6,7 @@ language: "en-US"
 early_access: false
 
 reviews:
-  profile: "chill"
+  profile: "assertive"
   request_changes_workflow: false
   high_level_summary: true
   poem: false
@@ -14,7 +14,8 @@ reviews:
   collapse_walkthrough: false
   auto_review:
     enabled: true
-    drafts: false
+    drafts: true
+    inline_comments: true
     base_branches:
       - main
       - master
