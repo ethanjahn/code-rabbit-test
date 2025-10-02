@@ -67,10 +67,4 @@ chat:
   auto_reply: true
 
 # Tone and style preferences
-tone_instructions: |
-  - Be direct and concise in feedback
-  - Focus on actionable improvements
-  - Prioritize type safety and code clarity
-  - Avoid being pedantic about minor style issues if code is otherwise clean
-  - Highlight modern Python idioms when legacy patterns are used
-  - Encourage brevity in documentation while maintaining clarity
+tone_instructions: "Be direct and concise. Focus on type safety, modern Python idioms, and actionable improvements. Avoid pedantry on minor style issues."
