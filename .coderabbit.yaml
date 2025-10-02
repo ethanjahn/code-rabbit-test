@@ -65,6 +65,3 @@ reviews:
 
 chat:
   auto_reply: true
-
-# Tone and style preferences
-tone_instructions: "Be direct and concise. Focus on type safety, modern Python idioms, and actionable improvements. Avoid pedantry on minor style issues."
