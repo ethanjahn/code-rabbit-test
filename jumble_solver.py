@@ -1,10 +1,34 @@
 import sys
 from collections import Counter
+import urllib.request
+import os
+
+
+def download_words():
+    file_path = 'wordlist.txt'
+    if os.path.exists(file_path):
+        print("Dictionary already exists")
+        return True
+    
+    print("Downloading dictionary...")
+    url = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt'
+    try:
+        resp = urllib.request.urlopen(url)
+        data = resp.read()
+        f = open(file_path, 'wb')
+        f.write(data)
+        f.close()
+        print("Download complete!")
+        return True
+    except:
+        print("Failed to download")
+        return False
 
 
 def solve(w):
     words = []
-    f = open('/usr/share/dict/words', 'r')
+    download_words()
+    f = open('words.txt', 'r')
     lines = f.readlines()
     f.close()
     
